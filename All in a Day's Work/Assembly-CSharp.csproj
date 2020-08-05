@@ -75,13 +75,12 @@
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
-    <Compile Include="Assets\Scripts\Board.cs" />
-    <Compile Include="Assets\Scripts\Board1.cs" />
+    <Compile Include="Assets\Scripts\CreateRoomUI.cs" />
     <Compile Include="Assets\Scripts\Dice.cs" />
-    <Compile Include="Assets\Scripts\Launcher.cs" />
     <Compile Include="Assets\Scripts\MyClient.cs" />
+    <Compile Include="Assets\Scripts\MyMatchmaker.cs" />
     <Compile Include="Assets\Scripts\Playerscript1.cs" />
-    <Compile Include="Assets\Scripts\RoomUIoff.cs" />
+    <Compile Include="Assets\Scripts\RoomUI.cs" />
     <Compile Include="Assets\Scripts\Waypointvar.cs" />
     <Compile Include="Assets\Scripts\playervar.cs" />
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

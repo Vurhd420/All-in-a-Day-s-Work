@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Realtime;
-
+using Photon.Pun;
 public class MyClient : IConnectionCallbacks
 {
     private LoadBalancingClient loadBalancingClient;
+    public GameObject CreateRoom;
 
     public MyClient()
     {
@@ -19,12 +20,12 @@ public class MyClient : IConnectionCallbacks
         this.UnsubscribeFromCallbacks();
     }
 
-    private void SubscribeToCallbacks()
+    public void SubscribeToCallbacks()
     {
         this.loadBalancingClient.AddCallbackTarget(this);
     }
 
-    private void UnsubscribeFromCallbacks()
+    public void UnsubscribeFromCallbacks()
     {
         this.loadBalancingClient.RemoveCallbackTarget(this);
     }
@@ -36,14 +37,13 @@ public class MyClient : IConnectionCallbacks
             this.loadBalancingClient.Disconnect();
         }
     }
-    void MyCreateRoom(string roomName, byte maxPlayers)
+    public void MyCreateRoom(string roomName, byte maxPlayers)
     {
         EnterRoomParams enterRoomParams = new EnterRoomParams();
         enterRoomParams.RoomName = roomName;
         enterRoomParams.RoomOptions = new RoomOptions();
         enterRoomParams.RoomOptions.MaxPlayers = maxPlayers;
-        this.loadBalancingClient.OpCreateRoom(enterRoomParams);
-
+        PhotonNetwork.CreateRoom(roomName, enterRoomParams.RoomOptions, TypedLobby.Default);
     }
 
     void IConnectionCallbacks.OnConnected()
@@ -58,12 +58,13 @@ public class MyClient : IConnectionCallbacks
     public void Connect()
     {
         this.loadBalancingClient.AppId = "<a9cb2597-69ea-4044-b13d-c7d55d24ed1f>";  // set your app id here
-        this.loadBalancingClient.AppVersion = "0.5";  // set your app version here
-
+        this.loadBalancingClient.AppVersion = "0.6";  // set your app version here
+        Debug.Log("connecting");
+        
         // "eu" is the European region's token
-        if (!this.loadBalancingClient.ConnectToRegionMaster("eu")) // can return false for errors
+        if (!this.loadBalancingClient.ConnectToRegionMaster("us")) // can return false for errors
         {
-            // log error
+            Debug.LogError("?");
         }
     }
     void IConnectionCallbacks.OnRegionListReceived(RegionHandler regionHandler)
@@ -80,7 +81,8 @@ public class MyClient : IConnectionCallbacks
     }
     void IConnectionCallbacks.OnConnectedToMaster() 
     {
-        // client is now connected to Photon Master Server and ready to create or join rooms
+        CreateRoom.GetComponent<RoomUI>().OnConnectedToMaster();
+        Debug.Log("ConnectedToMAster");
     }
 
     // [...]

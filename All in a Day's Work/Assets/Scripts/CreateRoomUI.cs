@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Realtime;
+using Photon.Pun;
 
-public class RoomUIoff : MonoBehaviour
+public class RoomUIoff : MonoBehaviourPunCallbacks
 {
     public int roomamount = 4;
     public Button CreateRoom;
+    public IConnectionCallbacks MyClient;
     // Start is called before the first frame update
     void Start()
     {
